@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebProjectManagementSystem.Models.Project>
+
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh; /* Позволява съдържанието да расте над видимата част */
+        overflow-x: hidden; /* Скрива само хоризонталното преливане */
+        background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Прави фона фиксиран */
+        color: black; /* Примерен цвят на текста */
+    }
+</style>
+
+<center><h2>Projects</h2></center>
+
+<!-- Филтриращи полета -->
+<div class="mb-3">
+    <input type="text" id="nameFilter" class="form-control mb-2" placeholder="Filter by Name" />
+    <select id="statusFilter" class="form-control">
+        <option value="">All</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="New">New</option>
+    </select>
+</div>
+
+<table class="table" id="projectsTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Model)
+        {
+            <tr>
+                <td>@project.Name</td>
+                <td>@project.Description</td>
+                <td>@project.StartDate.ToShortDateString()</td>
+                <td>@project.EndDate.ToShortDateString()</td>
+                <td>@project.Status</td>
+                <td>
+                    <a asp-controller="Tasks" asp-action="Index" asp-route-projectId="@project.Id" class="btn btn-info">View Tasks</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@project.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@project.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("Create", "Projects")" class="btn btn-primary mb-3">Create New Project</a>
+<a href="@Url.Action("Index", "Home")" class="btn btn-secondary back-button mb-3">Back to Home</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const nameFilter = document.getElementById('nameFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const table = document.getElementById('projectsTable');
+        const rows = table.querySelectorAll('tbody tr');
+
+        function filterTable() {
+            const nameValue = nameFilter.value.toLowerCase();
+            const statusValue = statusFilter.value.toLowerCase();
+
+            rows.forEach(row => {
+                const nameCell = row.cells[0].textContent.toLowerCase();
+                const statusCell = row.cells[4].textContent.toLowerCase();
+
+                const nameMatches = nameCell.includes(nameValue);
+                const statusMatches = statusValue === '' || statusCell.includes(statusValue);
+
+                if (nameMatches && statusMatches) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        nameFilter.addEventListener('input', filterTable);
+        statusFilter.addEventListener('change', filterTable);
+    });
+</script>

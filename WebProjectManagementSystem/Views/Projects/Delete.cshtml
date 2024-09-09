@@ -1,0 +1,55 @@
+﻿@model WebProjectManagementSystem.Models.Project
+
+@{
+    ViewData["Title"] = "Delete Project";
+}
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh; /* Позволява съдържанието да расте над видимата част */
+        overflow-x: hidden; /* Скрива само хоризонталното преливане */
+        background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Прави фона фиксиран */
+        color: black; /* Примерен цвят на текста */
+    }
+</style>
+
+<center><h2>Delete Project</h2></center>
+<center>
+<h3>Are you sure you want to delete this project?</h3>
+</center>
+<br />
+<div>
+    <h4>@Model.Name</h4>
+    <br />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Description
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Description
+        </dd>
+        <dt class="col-sm-2">
+            Start Date
+        </dt>
+        <dd class="col-sm-10">
+            @Model.StartDate.ToShortDateString()
+        </dd>
+        <dt class="col-sm-2">
+            End Date
+        </dt>
+        <dd class="col-sm-10">
+            @Model.EndDate.ToShortDateString()
+        </dd>
+    </dl>
+</div>
+<br />
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary back-button">Cancel</a>
+</form>

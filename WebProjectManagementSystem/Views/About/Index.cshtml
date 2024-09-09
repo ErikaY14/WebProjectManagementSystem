@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+}
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh; /* Позволява съдържанието да расте над видимата част */
+        overflow-x: hidden; /* Скрива само хоризонталното преливане */
+        background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Прави фона фиксиран */
+        color: black; /* Примерен цвят на текста */
+    }
+
+    .image-container {
+        display: flex; /* Подрежда снимките хоризонтално */
+        justify-content: space-around; /* Разстояние между снимките */
+        margin: 20px;
+    }
+
+    .image-box {
+        text-align: center; /* Центрира надписите под снимките */
+    }
+
+        .image-box img {
+            width: 200px; /* Примерен размер за снимките */
+            height: auto;
+            border: none; /* Добавя рамка към снимките */
+            border-radius: 5px;
+        }
+
+    .caption {
+        margin-top: 8px;
+        font-weight: bold;
+    }
+</style>
+
+<center><h1>About Us</h1></center>
+
+<center>
+    <p>
+    <br />
+    Behind every great human achievement, there is a team.
+    <br /> <br />
+    From medicine and space travel, to online bakery and pizza deliveries, our products help teams all over the planet advance humanity through the power of software.
+    <br /> <br />
+    Our mission is to provide a comprehensive and intuitive tool that helps teams stay organized, meet deadlines, and achieve their goals.
+    </p>
+</center>
+
+<p>
+    <center><h3>Our believes and values...</h3></center>
+    <div class="image-container">
+        <div class="image-box">
+            <img src="images/idealistic.png" alt="Image 1">
+            <div class="caption">Simplicity and Ease of Use</div>
+        </div>
+        <div class="image-box">
+            <img src="images/flexibility.png" alt="Image 2">
+            <div class="caption">Flexibility and Adaptability</div>
+        </div>
+        <div class="image-box">
+            <img src="images/group.png" alt="Image 3">
+            <div class="caption">Transparency and Collaboration</div>
+        </div>
+    </div>
+</p>
+

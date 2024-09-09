@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/images/page_backround_panda.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: black;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .image-box {
+            text-align: center;
+        }
+
+            .image-box img {
+                width: 200px;
+                height: auto;
+                border: none;
+                border-radius: 5px;
+            }
+
+        .caption {
+            margin-top: 8px;
+    </style>
+</head>
+<body>
+    <div class="context">
+        <h1 style="color: #000000;" class="display-1"><b><b><b><center>ProjectPanda</center></b></b></b></h1>
+        <h1 style="color: #000000;" class="display-4"><b><b><center>Manage your projects with ease!</center></b></b></h1>
+    </div>
+    <br /> <br /> <br />
+    <p>
+        <div class="image-container">
+            <div class="image-box">
+                <img src="images/project-management.png" alt="Image 1">
+                <div class="caption"><h4>Project management</h4></div>
+            </div>
+            <div class="image-box">
+                <img src="images/social-media-marketing.png" alt="Image 2">
+                <div class="caption"><h4>Marketing</h4></div>
+            </div>
+            <div class="image-box">
+                <img src="images/product-development.png" alt="Image 3">
+                <div class="caption"><h4>Product managmenet</h4></div>
+            </div>
+        </div>
+    </p>
+</body>
+</html>

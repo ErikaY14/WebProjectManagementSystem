@@ -1,0 +1,104 @@
+﻿html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+
+.back-button {
+    display: inline-block;
+    float: right; /* Поставя бутона вдясно */
+}
+
+body {
+    background-image: url('/images/your-background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Осигурява, че body е поне на височината на прозореца */
+}
+
+.container {
+    flex: 1; /* Позволява съдържанието да расте и да запълни пространството между хедъра и футъра */
+}
+
+.footer {
+    background-color: rgba(255, 255, 255, 0.5); /* Бял фон с 50% прозрачност */
+    color: #333; /* Цвят на текста */
+    padding: 3px; /* Вътрешно отстояние */
+    position: relative; /* Коригира позиционирането на футъра */
+    bottom: 0;
+    width: 100%;
+    text-align: center; /* Центриране на текста */
+    margin-top: auto; /* Позиционира футъра на дъното на страницата */
+}
+
+/* Основни стилове за навигационното меню */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.5); /* Бял фон с 50% прозрачност */
+    padding: 10px;
+}
+
+.nav-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-item {
+    margin-right: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    padding: 8px 15px;
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    .nav-link:hover {
+        background-color: #7cfc86;
+        color: #fff;
+    }
+
+    /* Активен линк */
+    .nav-link.active {
+        background-color: #007bff;
+        color: white;
+    }
+
+.nav-auth {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-auth li {
+        margin-left: 15px; /* Разстояние между линковете */
+    }
+
+    .nav-auth a {
+        text-decoration: none;
+        color: white; /* Цветът на линковете */
+    }
+
+        .nav-auth a:hover {
+            text-decoration: underline; /* Подчертаване при задържане на мишката */
+        }

@@ -1,0 +1,53 @@
+﻿@model WebProjectManagementSystem.Models.Task
+
+@{
+    ViewData["Title"] = "Create Task";
+}
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh; /* Позволява съдържанието да расте над видимата част */
+        overflow-x: hidden; /* Скрива само хоризонталното преливане */
+        background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Прави фона фиксиран */
+        color: black; /* Примерен цвят на текста */
+    }
+</style>
+
+<center><h2>Create Task</h2></center>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" name="ProjectId" value="@Context.Request.Query["projectId"]" />
+
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" name="Title" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea name="Description" class="form-control" rows="4" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="AssignedTo">Assigned To (User Id)</label>
+        <input type="number" name="AssignedTo" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="Status">Status</label>
+        <input type="text" name="Status" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="CreatedAt">Created At</label>
+        <input type="datetime-local" name="CreatedAt" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
+    </div>
+    <div class="form-group">
+        <label for="UpdatedAt">Updated At</label>
+        <input type="datetime-local" name="UpdatedAt" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Create Task</button>
+    <a href="@Url.Action("Index", "Tasks", new { projectId = Context.Request.Query["projectId"] })" class="btn btn-secondary back-button">Back to Tasks</a>
+</form>

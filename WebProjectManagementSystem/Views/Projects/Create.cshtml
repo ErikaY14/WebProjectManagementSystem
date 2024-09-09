@@ -1,0 +1,47 @@
+﻿@model WebProjectManagementSystem.Models.Project
+
+@{
+    ViewData["Title"] = "Create Project";
+}
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh; /* Позволява съдържанието да расте над видимата част */
+        overflow-x: hidden; /* Скрива само хоризонталното преливане */
+        background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Прави фона фиксиран */
+        color: black; /* Примерен цвят на текста */
+    }
+</style>
+
+<center><h2>Create Project</h2></center>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" name="Name" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea name="Description" class="form-control" rows="4" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="StartDate">Start Date</label>
+        <input type="date" name="StartDate" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="EndDate">End Date</label>
+        <input type="date" name="EndDate" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="Status">Status</label>
+        <input type="text" name="Status" class="form-control" required />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Create Project</button>
+    <a justify-content=flex-end href="@Url.Action("Index", "Projects")" class="btn btn-secondary back-button">Back to Projects</a>
+</form>

@@ -1,0 +1,120 @@
+﻿@model IEnumerable<WebProjectManagementSystem.Models.Task>
+
+@{
+    ViewData["Title"] = "Tasks";
+    var projectId = ViewData["ProjectId"];
+    var projectName = ViewData["ProjectName"]?.ToString();
+    var users = ViewBag.Users as IEnumerable<WebProjectManagementSystem.Models.User>;
+}
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: black;
+    }
+</style>
+
+<center><h2>Tasks for @projectName</h2></center>
+
+<a href="@Url.Action("ExportToExcel", "Tasks", new { projectId = ViewData["ProjectId"] })" class="btn btn-success back-button mb-3">Export to Excel</a>
+
+<!-- Филтриращи полета -->
+<div class="mb-3">
+    <input type="text" id="titleFilter" class="form-control mb-2" placeholder="Filter by Title" />
+    <select id="statusFilter" class="form-control mb-2">
+        <option value="">All</option>
+        <option value="To Do">New</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Done">Done</option>
+    </select>
+    <select id="assignedToFilter" class="form-control mb-2">
+        <option value="">Assigned To</option>
+        @foreach (var user in users)
+        {
+            <option value="@user.Username">@user.Username</option>
+        }
+    </select>
+</div>
+
+<table class="table" id="tasksTable">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.Title</td>
+                <td>@task.Description</td>
+                <td>
+                    @if (users != null)
+                    {
+                        var assignedUser = users.FirstOrDefault(u => u.Id == task.AssignedTo);
+                        @assignedUser?.Username
+                    }
+                </td>
+                <td>@task.Status</td>
+                <td>@task.CreatedAt.ToShortDateString()</td>
+                <td>@task.UpdatedAt.ToShortDateString()</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Create", "Tasks", new { projectId = ViewData["ProjectId"] })" class="btn btn-primary mb-3">Create New Task</a>
+<a href="@Url.Action("Index", "Projects")" class="btn btn-secondary back-button mb-3">Back to Projects</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const titleFilter = document.getElementById('titleFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const assignedToFilter = document.getElementById('assignedToFilter');
+        const table = document.getElementById('tasksTable');
+        const rows = table.querySelectorAll('tbody tr');
+
+        function filterTable() {
+            const titleValue = titleFilter.value.toLowerCase();
+            const statusValue = statusFilter.value.toLowerCase();
+            const assignedToValue = assignedToFilter.value.toLowerCase();
+
+            rows.forEach(row => {
+                const titleCell = row.cells[0].textContent.toLowerCase();
+                const statusCell = row.cells[3].textContent.toLowerCase();
+                const assignedToCell = row.cells[2].textContent.toLowerCase();
+
+                const titleMatches = titleCell.includes(titleValue);
+                const statusMatches = statusValue === '' || statusCell.includes(statusValue);
+                const assignedToMatches = assignedToValue === '' || assignedToCell.includes(assignedToValue);
+
+                if (titleMatches && statusMatches && assignedToMatches) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        titleFilter.addEventListener('input', filterTable);
+        statusFilter.addEventListener('change', filterTable);
+        assignedToFilter.addEventListener('change', filterTable);
+    });
+</script>

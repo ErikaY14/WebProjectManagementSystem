@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Projects";
+}
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh; /* Позволява съдържанието да расте над видимата част */
+        overflow-x: hidden; /* Скрива само хоризонталното преливане */
+        background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Прави фона фиксиран */
+        color: black; /* Примерен цвят на текста */
+    }
+</style>
+
+<div class="container mt-5">
+    <center><h2>Projects</h2></center>
+    <center>
+    <div class="alert alert-warning mt-4">
+        @ViewData["ErrorMessage"]
+    </div>
+    </center>
+
+    <center><a href="@Url.Action("Login", "Account")" class="btn btn-primary mt-3">Login</a></center>
+</div>

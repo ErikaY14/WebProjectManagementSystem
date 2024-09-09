@@ -1,0 +1,37 @@
+﻿@model WebProjectManagementSystem.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh; /* Позволява съдържанието да расте над видимата част */
+        overflow-x: hidden; /* Скрива само хоризонталното преливане */
+        background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Прави фона фиксиран */
+        color: black; /* Примерен цвят на текста */
+    }
+</style>
+
+<center><h2>User Profile</h2></center>
+
+<div class="card">
+    <div class="card-header">
+        Profile Information
+    </div>
+    <div class="card-body">
+        <p><strong>Username:</strong> @Model.Username</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Role:</strong> @Model.RoleType</p>
+        <p><strong>First Name:</strong> @Model.FirstName</p>
+        <p><strong>Last Name:</strong> @Model.LastName</p>
+        <!-- Добави допълнителна информация за профила, ако е необходимо -->
+    </div>
+</div>
+
+<center><a href="@Url.Action("Index", "Home")" class="btn btn-secondary mt-3">Back to Home</a></center>
